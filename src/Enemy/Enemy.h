@@ -11,6 +11,8 @@ public:
     Enemy(std::shared_ptr<GameData> gameData, Object& object, Player& player, int health, int damage, Animation walkingAnimation, Animation shootingAnimation, Animation dyingAnimation, Animation damagedAnimation);
     virtual void Update() = 0;
 protected:
+    bool PlayerHitted();
+protected:
     enum EnemyState
     {
         SHOOT,

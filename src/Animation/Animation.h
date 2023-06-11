@@ -11,9 +11,10 @@ public:
 	void Restart();
 	const sf::IntRect& GetAnimationFrame();
 	size_t GetCurrentFrameIterator();
+	bool AnimationFrameChanged();
 private:
 	std::vector<sf::IntRect> textureCoordinates;
-	bool animationCompleted;
+	bool animationFrameChanged;
 	size_t currentFrameIterator;
 	size_t nextFrameIterator;
 	const float time;

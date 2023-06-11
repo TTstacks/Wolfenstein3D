@@ -2,7 +2,7 @@
 #include "../Constants/texture_settings.h"
 
 Animation::Animation(bool isVertical, const size_t frameNumber, float time)
-	: nextFrameIterator(0), currentFrameIterator(0), animationCompleted(false), time(time)
+	: nextFrameIterator(0), currentFrameIterator(0), animationFrameChanged(false), time(time)
 {
 	this->textureCoordinates.resize(frameNumber);
 	for (size_t i = 0; i < frameNumber; i++)
@@ -17,6 +17,7 @@ Animation::Animation(bool isVertical, const size_t frameNumber, float time)
 
 void Animation::Animate(size_t start, size_t end)
 {
+	this->animationFrameChanged = false;
 	if(this->animationClock.getElapsedTime().asSeconds() > time)
 	{
 		this->currentFrameIterator = this->nextFrameIterator;
@@ -24,6 +25,7 @@ void Animation::Animate(size_t start, size_t end)
 		if (this->currentFrameIterator < start || this->currentFrameIterator > end) 
 			this->currentFrameIterator = this->nextFrameIterator = start;
 		this->animationClock.restart();
+		this->animationFrameChanged = true;
 	}
 }
 
@@ -40,4 +42,9 @@ const sf::IntRect& Animation::GetAnimationFrame()
 size_t Animation::GetCurrentFrameIterator()
 {
 	return this->currentFrameIterator;
+}
+
+bool Animation::AnimationFrameChanged()
+{
+	return this->animationFrameChanged;
 }

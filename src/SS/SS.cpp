@@ -5,17 +5,15 @@
 #include <iostream>
 
 SS::SS(std::shared_ptr<GameData> gameData, Object& object, Player& player)
-    : Enemy(gameData, object, player, 100, 100, Animation(true, 5), Animation(false, 3), Animation(false, 4), Animation(false, 2))
+    : Enemy(gameData, object, player, 100, 100, Animation(true, 5), Animation(false, 3), Animation(false, 4, 0.1f), Animation(false, 2, 0.2f))
 {
 }
 
 void SS::Update()
 {
-    const float objectLeftSide = this->object.sprite.getPosition().x / wall_width - this->object.sprite.getGlobalBounds().width / 2.f;
-    const float objectRightSide = this->object.sprite.getPosition().x / wall_width + this->object.sprite.getGlobalBounds().width / 2.f;
     if(this->enemyState == EnemyState::DEFAULT)
     {
-        if(objectLeftSide <= half_ray_number && half_ray_number <= objectRightSide && this->player.weapons.GetCurrentWeaponReference().isShooting())
+        if(this->PlayerHitted())
         {
             this->enemyState = EnemyState::DAMAGED;
             this->object.sprite.setTexture(this->gameData->resourceManager.GetTexture("SS/Damaged"));
@@ -63,10 +61,10 @@ void SS::Update()
     }
     else if(this->enemyState == EnemyState::DAMAGED)
     {
-        if(objectLeftSide <= half_ray_number && half_ray_number <= objectRightSide && this->player.weapons.GetCurrentWeaponReference().isShooting())
+        if(this->PlayerHitted() || !this->damagedAnimation.AnimationFrameChanged())
         {
-            this->health -= this->player.weapons.GetCurrentWeaponReference().GetDamage();
             this->damagedAnimation.Animate(0, 1);
+            if(this->damagedAnimation.AnimationFrameChanged()) this->health -= this->player.weapons.GetCurrentWeaponReference().GetDamage();
             this->object.sprite.setTextureRect(this->damagedAnimation.GetAnimationFrame());
             if(this->health <= 0) 
             {
@@ -86,8 +84,8 @@ void SS::Update()
     {
         if(this->dyingAnimation.GetCurrentFrameIterator() != 3) 
         {
-                this->dyingAnimation.Animate(0, 3);
-                this->object.sprite.setTextureRect(this->dyingAnimation.GetAnimationFrame());
+            this->dyingAnimation.Animate(0, 3);
+            this->object.sprite.setTextureRect(this->dyingAnimation.GetAnimationFrame());
         }
     }
 }
