@@ -37,7 +37,6 @@ int Weapon::GetDamage() const
 void Weapon::Shoot()
 {
 	this->shootingAnimation->Shoot();
-	this->shootingClock.restart();
 	if (this->bulletIsEndless) return;
 	if(isShooting()) bulletNumber--;
 }

@@ -20,6 +20,5 @@ private:
 	const int damage = 0;
 	int bulletNumber;
 	bool bulletIsEndless;
-	sf::Clock shootingClock;
 };
 #endif
