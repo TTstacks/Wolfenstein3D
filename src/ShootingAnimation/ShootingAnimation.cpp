@@ -2,7 +2,7 @@
 #include "../Constants/game_settings.h"
 
 ShootingAnimation::ShootingAnimation(sf::Texture& texture)
-	: sprite(texture), animation(false, 5, 0.08f), shootActivity(false)
+	: sprite(texture), animation(false, 5, 0.15f), shootActivity(false)
 {
 	this->sprite.setTextureRect(this->animation.GetAnimationFrame());
 	this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
