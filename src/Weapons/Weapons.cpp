@@ -7,7 +7,7 @@
 Weapons::Weapons(std::shared_ptr<GameData> gameData)
 	: gameData(gameData)
 {
-	this->weaponsData.emplace(std::make_pair<std::string, Weapon>(std::string("Knife"), Weapon{new ContinuousShootingAnimation(this->gameData->resourceManager.GetTexture("Knife")), 10}));
+	this->weaponsData.emplace(std::make_pair<std::string, Weapon>(std::string("Knife"), Weapon{new ContinuousShootingAnimation(this->gameData->resourceManager.GetTexture("Knife")), 5}));
 	this->weaponIterator = this->weaponsData.begin();
 }
 

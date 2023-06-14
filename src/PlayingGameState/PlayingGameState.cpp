@@ -2,9 +2,9 @@
 #include "../Constants/game_settings.h"
 
 PlayingGameState::PlayingGameState(GameLogic& gameLogic, std::shared_ptr<GameData> gameData)
-	: GameState(gameLogic, gameData), gameData(gameData), player(gameData, sf::Vector2f(1.f, 1.f), 0.f, 0.009f, 100), walls(gameData), objects(gameData, player, enemies), yellowWarningColor(255, 255, 0, 200), renderYellowWarning(false), canDrawYellowWarning(false)
+	: GameState(gameLogic, gameData), gameData(gameData), player(gameData, sf::Vector2f(1.5f, 1.5f), 0.f, 0.009f, 100), walls(gameData), objects(gameData, player, enemies), yellowWarningColor(255, 255, 0, 200), renderYellowWarning(false), canDrawYellowWarning(false)
 {
-	this->player.weapons.AddWeapon("Pistol", 10);
+	this->player.weapons.AddWeapon("Pistol", 20);
 	this->yellowWarning.setSize(sf::Vector2f(window_width, window_height));
 	this->yellowWarning.setFillColor(this->yellowWarningColor);
 }

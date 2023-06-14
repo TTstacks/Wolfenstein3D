@@ -12,17 +12,9 @@ public:
 	bool ShootHappening();
 	void Draw(sf::RenderWindow& window);
 protected:
-	enum class ShootState
-	{
-		DEFAULT,
-		START,
-		SHOOT,
-		END
-	};
-protected:
 	sf::Sprite sprite;
+	sf::Clock shootingClock;
 	Animation animation;
-	ShootState shootState;
 	bool shootActivity;
 };
 #endif

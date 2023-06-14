@@ -36,13 +36,10 @@ int Weapon::GetDamage() const
 
 void Weapon::Shoot()
 {
-	if(this->shootingClock.getElapsedTime().asSeconds() > 0.06f)
-	{
-		this->shootingAnimation->Shoot();
-		this->shootingClock.restart();
-		if (this->bulletIsEndless) return;
-		if(isShooting()) bulletNumber--;
-	}
+	this->shootingAnimation->Shoot();
+	this->shootingClock.restart();
+	if (this->bulletIsEndless) return;
+	if(isShooting()) bulletNumber--;
 }
 
 bool Weapon::isShooting() const

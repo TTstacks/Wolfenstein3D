@@ -7,5 +7,7 @@ class SS : public Enemy
 public:
     SS(std::shared_ptr<GameData> gameData, Object& object, Player& player);
     void Update() final;
+private:
+    sf::Clock damagedClock;
 };
 #endif

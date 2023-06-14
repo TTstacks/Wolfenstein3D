@@ -1,9 +1,8 @@
 #include "ShootingAnimation.h"
 #include "../Constants/game_settings.h"
-#include <iostream>
 
 ShootingAnimation::ShootingAnimation(sf::Texture& texture)
-	: sprite(texture), animation(false, 5), shootState(ShootState::DEFAULT), shootActivity(false)
+	: sprite(texture), animation(false, 5, 0.08f), shootActivity(false)
 {
 	this->sprite.setTextureRect(this->animation.GetAnimationFrame());
 	this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
@@ -18,7 +17,7 @@ void ShootingAnimation::SetShootActivity(bool shootActivity)
 
 bool ShootingAnimation::ShootHappening()
 {
-	return this->shootState == ShootState::SHOOT;
+	return this->animation.AnimationFrameChanged() && this->shootActivity && this->animation.GetCurrentFrameIterator() == 2;
 }
 
 void ShootingAnimation::Draw(sf::RenderWindow& window)

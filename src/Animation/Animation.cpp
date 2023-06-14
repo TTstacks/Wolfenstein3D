@@ -23,7 +23,10 @@ void Animation::Animate(size_t start, size_t end)
 		this->currentFrameIterator = this->nextFrameIterator;
 		this->nextFrameIterator = this->currentFrameIterator + 1;
 		if (this->currentFrameIterator < start || this->currentFrameIterator > end) 
-			this->currentFrameIterator = this->nextFrameIterator = start;
+		{
+			this->currentFrameIterator = start;
+			this->nextFrameIterator = start + 1;
+		}
 		this->animationClock.restart();
 		this->animationFrameChanged = true;
 	}
