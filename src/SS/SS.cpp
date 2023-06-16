@@ -12,29 +12,10 @@ void SS::Update()
 {
     bool playerHitted = this->PlayerHitted();
     if(playerHitted && this->enemyState != EnemyState::DEAD) this->enemyState = EnemyState::DAMAGED;
-    
+    int angleIndex = GetAngleIndex();
     if(this->enemyState == EnemyState::DEFAULT)
     {
-        float x = this->object.position.x - this->player.GetPosition().x;
-        float y = this->object.position.y - this->player.GetPosition().y;
-        float angle = std::atan2(y, x);
-        if(angle < 0) angle += pi * 2;
-        angle = pi * 2 - angle;
-        
-        for(int i = 1; i <= 8; i++)
-        {
-            float v = i * pi / 4;
-            if(i == 8)
-            {
-                if((angle > v - pi / 8 && angle <= pi * 2) || (angle > 0.f && angle <= pi / 8)) angle = i - 1;
-                 break;
-            }
-            if(angle > v - pi / 8 && angle <= v + pi / 8)
-            {
-                angle = i - 1; break;
-            }
-        }   
-        int rectLeft = (static_cast<int>(angle) + 1) % 8;
+        int rectLeft = (static_cast<int>(angleIndex) + 1) % 8;
         this->object.sprite.setTextureRect(sf::IntRect(rectLeft * texture_size, 0, texture_size, texture_size));
     }
     else if(this->enemyState == EnemyState::DAMAGED)
@@ -68,7 +49,7 @@ void SS::Update()
     {
         this->shootingAnimation.Animate(0, 2);
         this->object.sprite.setTextureRect(this->shootingAnimation.GetAnimationFrame());
-        if(this->shootingAnimation.GetCurrentFrameIterator() == 2) this->player.health -= std::rand() % 40;
+        if(this->shootingAnimation.GetCurrentFrameIterator() == 2 && this->shootingAnimation.AnimationFrameChanged()) this->player.health -= std::rand() % 40;
     }
     else if(this->enemyState == EnemyState::DODGE)
     {
@@ -86,4 +67,28 @@ void SS::Update()
             this->object.sprite.setTextureRect(this->dyingAnimation.GetAnimationFrame());
         }
     }
+}
+
+int SS::GetAngle()
+{
+    float x = this->object.position.x - this->player.GetPosition().x;
+    float y = this->object.position.y - this->player.GetPosition().y;
+    float angle = std::atan2(y, x);
+    if(angle < 0) angle += pi * 2;
+    angle = pi * 2 - angle;
+    
+    for(int i = 1; i <= 8; i++)
+    {
+        float v = i * pi / 4;
+        if(i == 8)
+        {
+            if((angle > v - pi / 8 && angle <= pi * 2) || (angle > 0.f && angle <= pi / 8)) angle = i - 1;
+            break;
+        }
+        if(angle > v - pi / 8 && angle <= v + pi / 8)
+        {
+            angle = i - 1; break;
+        }
+    }   
+    return angle;
 }

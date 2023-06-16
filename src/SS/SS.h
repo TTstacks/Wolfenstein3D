@@ -8,6 +8,8 @@ public:
     SS(std::shared_ptr<GameData> gameData, Object& object, Player& player);
     void Update() final;
 private:
+    int GetAngleIndex();
+private:
     sf::Clock damagedClock;
 };
 #endif
