@@ -69,7 +69,7 @@ void SS::Update()
     }
 }
 
-int SS::GetAngle()
+int SS::GetAngleIndex()
 {
     float x = this->object.position.x - this->player.GetPosition().x;
     float y = this->object.position.y - this->player.GetPosition().y;

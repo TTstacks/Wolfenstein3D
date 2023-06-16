@@ -10,6 +10,7 @@ class Object
 {
 public:
     Object(sf::Vector2f position, sf::Texture& texture, std::shared_ptr<PickableItem> pickableItem, float shiftY = 0.f, float width = 0.f, float height = 0.f);
+    void Update(Player& player, RenderableObjects& renderableObjects, bool& renderYellowWarning);
 public:
     bool removable;
     sf::Vector2f position;
