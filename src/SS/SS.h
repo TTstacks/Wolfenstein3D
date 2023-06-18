@@ -9,7 +9,15 @@ public:
     void Update() final;
 private:
     int GetAngleIndex();
+    void SetDodgeVelocity();
 private:
     sf::Clock damagedClock;
+    sf::Clock randomMovementClock;
+    sf::Clock shootingClock;
+    sf::Vector2f dodgeVelocity;
+    int shootCounter;
+    int shootNumber;
+    int randAngleIndex;
+    int angleAxis;
 };
 #endif
