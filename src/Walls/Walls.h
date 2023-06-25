@@ -14,7 +14,9 @@ class Walls
 public:
     Walls(std::shared_ptr<GameData> gameData);
     void Update(float playerAngle, sf::Vector2f playerPosition, RenderableObjects& RenderableObjects);
+    const float& GetWallDistance(size_t index);
 private:
     std::shared_ptr<GameData> gameData;
+    std::vector<float> wallDistances;
 };
 #endif

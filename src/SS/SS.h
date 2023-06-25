@@ -13,8 +13,10 @@ private:
 private:
     sf::Clock damagedClock;
     sf::Clock randomMovementClock;
-    sf::Clock shootingClock;
+    sf::Clock dodgeClock;
+    sf::Clock chaseClock;
     sf::Vector2f dodgeVelocity;
+    sf::Vector2f targetPosition;
     int shootCounter;
     int shootNumber;
     int randAngleIndex;

@@ -4,15 +4,16 @@
 #include "../Constants/texture_settings.h"
 #include <cmath>
 #include <algorithm>
+#include <iostream>
 
 Object::Object(sf::Vector2f position, sf::Texture& texture, std::shared_ptr<PickableItem> pickableItem, float shiftY, float width, float height)
-    : position(position), sprite(texture), removable(false), pickableItem(pickableItem)
+    : position(position), sprite(texture), playerCanInteract(false), removable(false), pickableItem(pickableItem)
 {
     if(width == 0.f || height == 0.f) sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2 - shiftY);
     else sprite.setOrigin(width / 2, height / 2 - shiftY);
 }
 
-void Object::Update(Player& player, RenderableObjects& renderableObjects, bool& renderYellowWarning)
+void Object::Update(Player& player, RenderableObjects& renderableObjects, Walls& walls, bool& renderYellowWarning)
 {
     float x = position.x - player.GetPosition().x;
     float y = position.y - player.GetPosition().y;
@@ -36,6 +37,9 @@ void Object::Update(Player& player, RenderableObjects& renderableObjects, bool& 
         sprite.setPosition(windowX * wall_width, half_window_height);
         renderableObject.distance = y;
         renderableObject.sprite = sprite;
+        if(windowX >= 0.f && windowX <= ray_number - 1) this->playerCanInteract = renderableObject.distance <= walls.GetWallDistance(static_cast<size_t>(windowX));
+        else this->playerCanInteract = false;
         renderableObjects.AddRenderableObject(renderableObject);
+    
     }
 }

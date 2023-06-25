@@ -11,6 +11,7 @@
 #include "../PickableScore/PickableScore.h"
 #include "../PickableWeapon/PickableWeapon.h"
 #include "../NotPickableItem/NotPickableItem.h"
+#include "../Walls/Walls.h"
 #include "../Enemies/Enemies.h"
 #include <memory>
 #include <list>
@@ -19,7 +20,7 @@ class Objects
 {
 public:
     Objects(std::shared_ptr<GameData> gameData, Player& player, Enemies& enemies);
-    void Update(Player& player, RenderableObjects& renderableObjects, bool& renderYellowWarning);
+    void Update(Player& player, RenderableObjects& renderableObjects, Walls& walls, bool& renderYellowWarning);
 private:
     std::list<Object> objectsData;
     std::shared_ptr<GameData> gameData;

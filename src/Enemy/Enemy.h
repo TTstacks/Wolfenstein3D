@@ -12,6 +12,7 @@ public:
     virtual void Update() = 0;
 protected:
     bool PlayerHitted();
+    bool CanSeePlayer(Player& player);
 protected:
     enum EnemyState
     {

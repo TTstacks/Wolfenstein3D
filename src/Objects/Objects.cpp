@@ -22,8 +22,8 @@ Objects::Objects(std::shared_ptr<GameData> gameData, Player& player, Enemies& en
     enemies.Add(new SS(this->gameData, objectsData.back(), player));
 }
 
-void Objects::Update(Player& player, RenderableObjects& renderableObjects, bool& renderYellowWarning)
+void Objects::Update(Player& player, RenderableObjects& renderableObjects, Walls& walls, bool& renderYellowWarning)
 {
     objectsData.remove_if([](Object& object){return object.removable;});
-    for(auto& object : objectsData) object.Update(player, renderableObjects, renderYellowWarning);
+    for(auto& object : objectsData) object.Update(player, renderableObjects, walls, renderYellowWarning);
 }
