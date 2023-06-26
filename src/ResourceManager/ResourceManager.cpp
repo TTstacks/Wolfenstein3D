@@ -14,7 +14,7 @@ sf::Texture& ResourceManager::GetTexture(std::string_view textureName)
 void ResourceManager::AddFont(std::string_view fontPath, std::string_view fontName)
 {
 	if (this->fontData.contains(fontName.data())) return;
-	this->textureData[fontName.data()].loadFromFile(fontPath.data());
+	this->fontData[fontName.data()].loadFromFile(fontPath.data());
 }
 
 sf::Font& ResourceManager::GetFont(std::string_view fontName)

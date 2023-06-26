@@ -68,7 +68,8 @@ void SS::Update()
         this->shootingAnimation.Animate(0, 2);
         if(this->shootingAnimation.GetCurrentFrameIterator() == 2 && this->shootingAnimation.AnimationFrameChanged()) 
         {
-            this->player.health -= std::rand() % 40;
+            this->player.health -= std::rand() % 20 + 1;
+            this->player.renderRedWarning = true;
             this->shootCounter++;
         }
         this->object.sprite.setTextureRect(this->shootingAnimation.GetAnimationFrame());

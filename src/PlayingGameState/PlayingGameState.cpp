@@ -27,6 +27,8 @@ void PlayingGameState::Draw()
 	this->renderableObjects.Draw(this->gameData);
 	this->player.weapons.GetCurrentWeaponReference().Draw(this->gameData->window);
 	this->DrawYellowWarning();
+	this->player.DrawBar();
+	this->player.DrawRedWarning();
 }
 
 void PlayingGameState::DrawYellowWarning()

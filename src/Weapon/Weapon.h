@@ -11,6 +11,7 @@ public:
 	void PressShoot();
 	void Draw(sf::RenderWindow& window);
 	void AddBullet(int bullets);
+	int GetBullet();
 	bool HasBullet() const;
 	int GetDamage() const;
 	void Shoot();

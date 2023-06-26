@@ -13,14 +13,25 @@ public:
 	const sf::Vector2f& GetPosition();
 	void Rotate();
 	void Move();
+	void DrawBar();
+	void DrawRedWarning();
 public:
 	int health;
 	int score;
 	Weapons weapons;
+	bool renderRedWarning;
 private:
 	std::shared_ptr<GameData> gameData;
 	float angle;
 	float speed;
 	sf::Vector2f position;
+	sf::Sprite barSprite;
+	sf::Sprite headSprite;
+	sf::Text healthText;
+	sf::Text ammoText;
+	sf::RectangleShape redWarning;
+	sf::Color redWarningColor;
+	sf::Clock redWarningClock;
+	bool canDrawRedWarning;
 };
 #endif

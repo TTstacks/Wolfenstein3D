@@ -23,6 +23,11 @@ void Weapon::AddBullet(int bullets)
 	this->bulletNumber += bullets;
 }
 
+int Weapon::GetBullet()
+{
+	return this->bulletNumber;
+}
+
 bool Weapon::HasBullet() const
 {
 	if(bulletIsEndless) return true;
