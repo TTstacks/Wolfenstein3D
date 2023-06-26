@@ -2,7 +2,7 @@
 #include <cmath>
 
 Walls::Walls(std::shared_ptr<GameData> gameData)
-    : gameData(gameData), wallDistances(ray_number)
+    : gameData(gameData)
 {
 }
 
@@ -58,7 +58,6 @@ void Walls::Update(float playerAngle, sf::Vector2f playerPosition, RenderableObj
 	    	const int worldMapElement = WorldMap::GetElement(playerCeilPosition.x, playerCeilPosition.y);
 	    	if (worldMapElement)
 	    	{
-				this->wallDistances[i] = object.distance;
 				int rectLeft, rectTop = 0, rectHeight = texture_size;
 	    		if(totalStepSize.y - unitStepSize.y > totalStepSize.x - unitStepSize.x)
                     rectLeft = (worldMapElement - 1) * texture_size + static_cast<int>((playerPosition.x + object.distance * cosAngle) * texture_wall_size) % texture_wall_size * wall_width;
@@ -79,9 +78,4 @@ void Walls::Update(float playerAngle, sf::Vector2f playerPosition, RenderableObj
 	    }
         wallAngle += delta_angle;
     }
-}
-
-const float& Walls::GetWallDistance(size_t index)
-{
-	return this->wallDistances[index];
 }

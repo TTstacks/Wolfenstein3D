@@ -20,7 +20,7 @@ class Objects
 {
 public:
     Objects(std::shared_ptr<GameData> gameData, Player& player, Enemies& enemies);
-    void Update(Player& player, RenderableObjects& renderableObjects, Walls& walls, bool& renderYellowWarning);
+    void Update(Player& player, RenderableObjects& renderableObjects, bool& renderYellowWarning);
 private:
     std::list<Object> objectsData;
     std::shared_ptr<GameData> gameData;

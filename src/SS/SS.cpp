@@ -14,12 +14,12 @@ void SS::Update()
 {
     float x = this->object.position.x - this->player.GetPosition().x;
     float y = this->object.position.y - this->player.GetPosition().y;
-    bool playerHitted = this->PlayerHitted();
     bool canSee = this->CanSeePlayer(this->player);
+    bool playerHitted = this->PlayerHitted() && canSee;
     if(playerHitted && this->enemyState != EnemyState::DEAD) this->enemyState = EnemyState::DAMAGED;
     if(this->enemyState != EnemyState::DODGE) this->dodgeClock.restart();
     if(this->enemyState != EnemyState::CHASE) this->chaseClock.restart();
-    if(this->enemyState == EnemyState::SHOOT && !this->object.playerCanInteract) 
+    if(this->enemyState == EnemyState::SHOOT && !canSee) 
     {
         this->enemyState = EnemyState::DEFAULT;
         this->object.sprite.setTexture(this->gameData->resourceManager.GetTexture("SS/Angles"));
@@ -29,7 +29,11 @@ void SS::Update()
     if(this->enemyState == EnemyState::DEFAULT)
     {
         this->object.sprite.setTextureRect(sf::IntRect(angleIndex * texture_size, 0, texture_size, texture_size));
-        if(canSee) this->enemyState = EnemyState::CHASE;
+        if(canSee) 
+        {
+            int randState = rand() % 2;
+            this->enemyState = randState? EnemyState::DODGE : EnemyState::CHASE;
+        }
     }
     else if(this->enemyState == EnemyState::DAMAGED)
     {

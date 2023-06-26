@@ -14,7 +14,7 @@ bool Enemy::PlayerHitted()
 {
     const float objectLeftSide = this->object.sprite.getPosition().x / wall_width - this->object.sprite.getGlobalBounds().width / 2.f;
     const float objectRightSide = this->object.sprite.getPosition().x / wall_width + this->object.sprite.getGlobalBounds().width / 2.f;
-    return objectLeftSide <= half_ray_number && half_ray_number <= objectRightSide && this->player.weapons.GetCurrentWeaponReference().isShooting() && this->object.playerCanInteract;
+    return objectLeftSide <= half_ray_number && half_ray_number <= objectRightSide && this->player.weapons.GetCurrentWeaponReference().isShooting();
 }
 
 bool Enemy::CanSeePlayer(Player& player)

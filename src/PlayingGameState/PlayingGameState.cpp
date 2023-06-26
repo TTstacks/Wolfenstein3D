@@ -19,7 +19,7 @@ void PlayingGameState::Update()
 	this->player.weapons.GetCurrentWeaponReference().Shoot();
 	this->walls.Update(this->player.GetAngle(), this->player.GetPosition(), this->renderableObjects);
 	this->enemies.Update();
-	this->objects.Update(this->player, this->renderableObjects, this->walls, this->renderYellowWarning);
+	this->objects.Update(this->player, this->renderableObjects, this->renderYellowWarning);
 }
 
 void PlayingGameState::Draw()
