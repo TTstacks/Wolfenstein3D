@@ -28,6 +28,7 @@ Game::Game()
 	this->gameData->resourceManager.AddTexture("images/Pickup/Score/Treasure.png", "Treasure");
 	this->gameData->resourceManager.AddTexture("images/Player/Head/Head.png", "Head");
 	this->gameData->resourceManager.AddTexture("images/Player/Bar/Bar.png", "Bar");
+	this->gameData->resourceManager.AddFont("fonts/FFFFORWA.ttf", "FFFFORWA");
 	this->gameData->window.create(sf::VideoMode(window_width, window_height + task_bar_height), "Wolfenstein3D");
 	this->gameData->window.setMouseCursorVisible(false);
 	this->gameLogic = std::make_unique<GameLogic>(this->gameData);
